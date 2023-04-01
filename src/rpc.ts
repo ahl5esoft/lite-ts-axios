@@ -1,12 +1,10 @@
 import axios from 'axios';
 import { ApiResponse, Header, RpcBase, RpcCallOption } from 'lite-ts-rpc';
 
-export class AxiosRpc extends RpcBase {
-    public static body = {};
-    public static header = {
-        [Header.timeout]: 20000,
-    };
+const timeout = 20_000;
+RpcBase.header[Header.timeout] = timeout + '';
 
+export class AxiosRpc extends RpcBase {
     public constructor(
         private m_BaseUrl: string,
     ) {
@@ -25,11 +23,11 @@ export class AxiosRpc extends RpcBase {
             ...AxiosRpc.body,
             ...opt.body,
         }, {
-            timeout: AxiosRpc.header[Header.timeout],
             headers: {
                 ...AxiosRpc.header,
                 ...opt.header,
             },
+            timeout,
         });
         return res as ApiResponse<T>;
     }
