@@ -11,7 +11,7 @@ export class AxiosRpc extends RpcBase {
         super();
     }
 
-    public async callWithoutThrow<T>(opt: RpcCallOption) {
+    protected async onCall<T>(opt: RpcCallOption) {
         if (!opt?.route)
             throw new Error(`${AxiosRpc.name}.send: 无效路由`);
 
