@@ -1,8 +1,8 @@
 import axios from 'axios';
-import { ApiResponse, Header, RpcBase, RpcCallOption } from 'lite-ts-rpc';
+import { RpcResponse, RpcHeader, RpcBase, RpcCallOption } from 'lite-ts-rpc';
 
 const timeout = 20_000;
-RpcBase.header[Header.timeout] = timeout + '';
+RpcBase.header[RpcHeader.timeout] = timeout + '';
 
 export class AxiosRpc extends RpcBase {
     public constructor(
@@ -29,6 +29,6 @@ export class AxiosRpc extends RpcBase {
             },
             timeout,
         });
-        return res as ApiResponse<T>;
+        return res as RpcResponse<T>;
     }
 }
