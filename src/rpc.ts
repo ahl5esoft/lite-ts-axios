@@ -19,12 +19,12 @@ export class AxiosRpc extends RpcBase {
         if (routeParts.length == 3)
             routeParts.splice(2, 0, 'bg');
         const url = this.m_BaseUrl + routeParts.join('/');
-        const { data: res } = await axios.post(url, opt.body?.constructor == FormData ? opt.body : {
-            ...AxiosRpc.body,
+        const { data: res } = await axios.post(url, opt.body instanceof FormData ? opt.body : {
+            ...RpcBase.body,
             ...opt.body,
         }, {
             headers: {
-                ...AxiosRpc.header,
+                ...RpcBase.header,
                 ...opt.header,
             },
             timeout,
